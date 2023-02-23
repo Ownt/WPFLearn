@@ -19,8 +19,7 @@ namespace WPFLearn.Infrastructure.Commands
             canExecute = CanExecute;
         }
 
-        public override bool CanExecute(object? parameter)
-            => canExecute?.Invoke(arg: parameter)?? true;
+        public override bool CanExecute(object? parameter) => canExecute?.Invoke(arg: parameter)?? true;
 
         public override void Execute(object? parameter) => execute(obj: parameter);
     }
