@@ -14,7 +14,7 @@ namespace WPFLearn.Infrastructure.Commands
         private readonly Func<object, bool>? canExecute;
 
         public LambdaCommand(Action<object> Execute, Func<object, bool>? CanExecute = null)
-        {
+    {
             execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
             canExecute = CanExecute;
         }
