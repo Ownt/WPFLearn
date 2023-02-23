@@ -1,6 +1,6 @@
 ﻿namespace WPFLearn.Models
 {
-    class Service
+    internal class Service
     {
         public string? Name { get; set; }
     }

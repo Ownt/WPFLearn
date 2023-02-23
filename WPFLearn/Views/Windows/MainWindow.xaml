@@ -33,7 +33,39 @@
                 
             </TabItem>
             <TabItem Header="Клиенты"/>
-            <TabItem Header="Предоставление услуг"/>
+            <TabItem Header="Предоставление услуг">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Договора">
+                        <ListBox Margin="0,5,0,5"
+                                ItemsSource="{Binding ProvisionOfServices}" 
+                                DisplayMemberPath="Name"
+                                SelectedItem="{Binding pOfServices}" />
+                    </GroupBox>
+                    <GroupBox Header="{Binding pOfServices.Name, StringFormat='Договор №{0}'}"
+                        Grid.Column="1" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="8*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel>
+                                <Label HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                       Content="{Binding pOfServices.Clients.Name}"/>
+                            </StackPanel>
+                            <DataGrid Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding pOfServices.Services}" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                  <DataGridTextColumn Header="Услуги" Binding="{Binding Name}"/>
+                                </DataGrid.Columns> 
+                            </DataGrid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
