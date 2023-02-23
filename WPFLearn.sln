@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFLearnTest", "Tests\WPFLe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleWPFLearnTest", "Tests\ConsoleWPFLearnTest\ConsoleWPFLearnTest.csproj", "{FD61BEE1-737D-4BF2-AE5D-5D6A97A63F3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFTestLib", "WPFTestLib\WPFTestLib.csproj", "{962DECCD-BBC0-4166-A9DA-67EC4BB0C4A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{FD61BEE1-737D-4BF2-AE5D-5D6A97A63F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD61BEE1-737D-4BF2-AE5D-5D6A97A63F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD61BEE1-737D-4BF2-AE5D-5D6A97A63F3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{962DECCD-BBC0-4166-A9DA-67EC4BB0C4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{962DECCD-BBC0-4166-A9DA-67EC4BB0C4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{962DECCD-BBC0-4166-A9DA-67EC4BB0C4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{962DECCD-BBC0-4166-A9DA-67EC4BB0C4A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{ACD45E98-6C65-4BD3-86E7-C48824F3F1F5} = {334CEA44-1145-4153-BABA-A69DC464FF28}
 		{FD61BEE1-737D-4BF2-AE5D-5D6A97A63F3C} = {334CEA44-1145-4153-BABA-A69DC464FF28}
+		{962DECCD-BBC0-4166-A9DA-67EC4BB0C4A3} = {334CEA44-1145-4153-BABA-A69DC464FF28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36783521-127B-48E9-8907-239108CB5632}
