@@ -12,7 +12,6 @@
     <Folder Include="Resources\" />
     <Folder Include="Data\" />
     <Folder Include="Services\" />
-    <Folder Include="Infrastructure\" />
   </ItemGroup>
 
 </Project>
