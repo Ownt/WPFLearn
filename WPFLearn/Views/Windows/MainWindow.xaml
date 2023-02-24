@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:WPFLearn.ViewModels"
+        xmlns:model="clr-namespace:WPFLearn.Models"
         xmlns:local="clr-namespace:WPFLearn"
         mc:Ignorable="d"
         Title="{Binding Title}"
@@ -43,7 +44,8 @@
                         <ListBox Margin="0,5,0,5"
                                 ItemsSource="{Binding ProvisionOfServices}" 
                                 DisplayMemberPath="Name"
-                                SelectedItem="{Binding pOfServices}" />
+                                SelectedItem="{Binding pOfServices}" 
+                                 SelectedIndex="0"/>
                         <!--<StackPanel Orientation="Horizontal">
                             <Button Content="Добавить"/>
                         </StackPanel>-->
@@ -56,17 +58,36 @@
                                 <RowDefinition Height="8*"/>
                             </Grid.RowDefinitions>
                             <StackPanel>
-                                <Label HorizontalAlignment="Left"
-                                       VerticalAlignment="Top"
-                                       Margin="10,10,0,0"
-                                       Content="{Binding pOfServices.Clients.Name}"/>
+                                <TextBlock HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Margin="10,10,0,0"
+                                           Text="{Binding pOfServices.Clients.Name}"/>
+                                <DatePicker HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Margin="10,10,0,0"
+                                            SelectedDate="{Binding pOfServices.Date, StringFormat=dd.MM.yy}"/>
                             </StackPanel>
-                            <DataGrid Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding pOfServices.Services}" AutoGenerateColumns="False">
+                            <DataGrid Grid.Row="1" 
+                                      Margin="5,5,5,5" 
+                                      ItemsSource="{Binding pOfServices.Services}" 
+                                      AutoGenerateColumns="False"
+                                      GridLinesVisibility="Horizontal"
+                                      HorizontalGridLinesBrush="Gray">
+                                <!--HorizontalGridLinesBrush="Transparent"-->
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Услуги" Binding="{Binding Name}"/>
-                                    <DataGridTextColumn Header="Дата договора" 
-                                                        Binding="{Binding DataContext.pOfServices.Date, StringFormat=dd.MM.yyyy,
-                                        RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    <DataGridTextColumn Header="Услуги" Binding="{Binding Name}" IsReadOnly="True"/>
+                                    <DataGridTemplateColumn Header="Дата договора">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate DataType="model:ProvisionOfServices">
+                                                <TextBlock Text="{ Binding DataContext.pOfServices.Date, StringFormat=dd.MM.yy,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate DataType="model:ProvisionOfServices">
+                                                <DatePicker SelectedDate="{ Binding DataContext.pOfServices.Date, StringFormat=dd.MM.yy, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns> 
                             </DataGrid>
                         </Grid>
