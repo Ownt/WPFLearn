@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -64,17 +65,16 @@ namespace WPFLearn.ViewModels
 
             #endregion
 
-            var services_index = 0;
-
             var services = Enumerable.Range(1, 10).Select(i => new Service
             {
-                Name = $"Услуга {services_index++}"
+                Name = $"Услуга {i}"
             });
 
 
             var provision = Enumerable.Range(1, 20).Select(i => new ProvisionOfServices
             {
                 Name = $"Договор №{i}",
+                Date = DateTime.Now,
                 Services = new ObservableCollection<Service>(services),
                 Clients = new Clients($"Клиент {i}")
             });

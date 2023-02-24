@@ -22,7 +22,7 @@
             <MenuItem Header="Помощь"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom"/>
-        <TabControl>
+        <TabControl SelectedIndex="2">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -44,6 +44,9 @@
                                 ItemsSource="{Binding ProvisionOfServices}" 
                                 DisplayMemberPath="Name"
                                 SelectedItem="{Binding pOfServices}" />
+                        <!--<StackPanel Orientation="Horizontal">
+                            <Button Content="Добавить"/>
+                        </StackPanel>-->
                     </GroupBox>
                     <GroupBox Header="{Binding pOfServices.Name, StringFormat='Договор №{0}'}"
                         Grid.Column="1" >
@@ -53,13 +56,17 @@
                                 <RowDefinition Height="8*"/>
                             </Grid.RowDefinitions>
                             <StackPanel>
-                                <Label HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"
+                                <Label HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Margin="10,10,0,0"
                                        Content="{Binding pOfServices.Clients.Name}"/>
                             </StackPanel>
                             <DataGrid Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding pOfServices.Services}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                  <DataGridTextColumn Header="Услуги" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Услуги" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Дата договора" 
+                                                        Binding="{Binding DataContext.pOfServices.Date, StringFormat=dd.MM.yyyy,
+                                        RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                                 </DataGrid.Columns> 
                             </DataGrid>
                         </Grid>
