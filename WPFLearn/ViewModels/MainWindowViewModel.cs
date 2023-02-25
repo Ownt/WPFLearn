@@ -67,7 +67,9 @@ namespace WPFLearn.ViewModels
 
             var services = Enumerable.Range(1, 10).Select(i => new Service
             {
-                Name = $"Услуга {i}"
+                Name = $"Услуга {i}",
+                Price = 100 * i,
+                Description = $"Очень длинной описание предоставляемой услуги {i}"
             });
 
 

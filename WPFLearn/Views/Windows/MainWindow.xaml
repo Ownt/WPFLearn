@@ -76,18 +76,8 @@
                                 <!--HorizontalGridLinesBrush="Transparent"-->
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Услуги" Binding="{Binding Name}" IsReadOnly="True"/>
-                                    <DataGridTemplateColumn Header="Дата договора">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate DataType="model:ProvisionOfServices">
-                                                <TextBlock Text="{ Binding DataContext.pOfServices.Date, StringFormat=dd.MM.yy,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                        <DataGridTemplateColumn.CellEditingTemplate>
-                                            <DataTemplate DataType="model:ProvisionOfServices">
-                                                <DatePicker SelectedDate="{ Binding DataContext.pOfServices.Date, StringFormat=dd.MM.yy, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellEditingTemplate>
-                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
+                                    <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
                                 </DataGrid.Columns> 
                             </DataGrid>
                         </Grid>
