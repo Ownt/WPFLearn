@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:WPFLearn"
              StartupUri="Views/Windows/MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="BtnBase" TargetType="ButtonBase">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="3,3,3,3"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource BtnBase}"/>
     </Application.Resources>
 </Application>
