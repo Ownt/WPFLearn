@@ -53,6 +53,47 @@ namespace WPFLearn.ViewModels
 
         #endregion
 
+        #region CreateProvisionOfServicesCommand
+
+        /// <summary> Команда добавления договора </summary>
+        public ICommand CreateNewProvisionOfServicesCommand { get; }
+
+        private bool CanCreateNewProvisionOfServicesExecute(object p) => true;
+
+        private void OnCreateNewProvisionOfServicesExecute(object p)
+        {
+            var provisionOfService_max_index = ProvisionOfServices.Count + 1;
+            var new_provisionOfService = new ProvisionOfServices
+            {
+                Name = $"Договор №{provisionOfService_max_index}",
+                Date = DateTime.Now,
+                Services = new ObservableCollection<Service>(),
+                Clients = new Clients($"Клиент {provisionOfService_max_index}")
+            };
+
+            ProvisionOfServices.Add(new_provisionOfService);
+        }
+
+        #endregion
+
+        #region DeleteProvisionOfServicesCommand
+
+        /// <summary> Команда удаления договора </summary>
+        public ICommand DeleteProvisionOfServicesCommand { get; }
+
+        private bool CanDeleteProvisionOfServicesExecute(object p) => p is ProvisionOfServices && ProvisionOfServices.Contains(pOfServices);
+
+        private void OnDeleteProvisionOfServicesExecute(object p)
+        {
+            if (!(p is ProvisionOfServices)) return;
+            var index = ProvisionOfServices.IndexOf(pOfServices);
+            ProvisionOfServices.Remove(pOfServices);
+            if (index < ProvisionOfServices.Count)
+                pOfServices = ProvisionOfServices[index];
+        }
+
+        #endregion
+
         #endregion
 
         /*-------------------------------------------------------------------*/
@@ -61,7 +102,21 @@ namespace WPFLearn.ViewModels
         {
             #region Команды
 
-            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
+            /// <summary> Закрытие приложения </summary>
+            CloseApplicationCommand = new LambdaCommand(
+                OnCloseApplicationCommandExecuted, 
+                CanCloseApplicationCommandExecuted);
+
+            /// <summary> Добавление договора </summary>
+            CreateNewProvisionOfServicesCommand = new LambdaCommand(
+                OnCreateNewProvisionOfServicesExecute, 
+                CanCreateNewProvisionOfServicesExecute);
+
+            /// <summary> Удаление договора </summary>
+            DeleteProvisionOfServicesCommand = new LambdaCommand(
+                OnDeleteProvisionOfServicesExecute, 
+                CanDeleteProvisionOfServicesExecute);
+
 
             #endregion
 
