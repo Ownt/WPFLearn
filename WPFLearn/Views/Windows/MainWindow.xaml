@@ -22,7 +22,9 @@
             </MenuItem>
             <MenuItem Header="Помощь"/>
         </Menu>
-        <StatusBar DockPanel.Dock="Bottom"/>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="Готово!"/>
+        </StatusBar>
         <TabControl SelectedIndex="2">
             <TabItem>
                 <TabItem.Header>
@@ -43,8 +45,8 @@
                     <GroupBox Header="Договора">
                         <DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1">
-                                <Button Content="Добавить" Margin="0,0,3,0" Command="{Binding CreateNewProvisionOfServicesCommand}"/>
-                                <Button Content="Удалить" Margin="3,0,0,0" Command="{Binding DeleteProvisionOfServicesCommand}" CommandParameter="{Binding pOfServices}"/>
+                                <Button Content="Добавить" Command="{Binding CreateNewProvisionOfServicesCommand}"/>
+                                <Button Content="Удалить" Command="{Binding DeleteProvisionOfServicesCommand}" CommandParameter="{Binding pOfServices}"/>
                             </UniformGrid>
                             <ListBox Margin="0,5,0,5"
                                 ItemsSource="{Binding ProvisionOfServices}" 
