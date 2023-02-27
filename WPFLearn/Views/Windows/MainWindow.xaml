@@ -61,8 +61,17 @@
                             <ListBox
                                 ItemsSource="{Binding Source={StaticResource ContractsCollection}}" 
                                 DisplayMemberPath="Name"
-                                SelectedItem="{Binding selectedContract}" 
-                                 SelectedIndex="0"/>
+                                SelectedItem="{Binding selectedContract}"
+                                VirtualizingPanel.IsContainerVirtualizable="True"
+                                VirtualizingPanel.IsVirtualizing="True"
+                                VirtualizingPanel.VirtualizationMode="Recycling"
+                                 SelectedIndex="0">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
                         </DockPanel>
                     </GroupBox>
                     <GroupBox Header="{Binding selectedContract.Name, StringFormat='Договор №{0}'}"
