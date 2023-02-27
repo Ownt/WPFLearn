@@ -68,7 +68,7 @@ namespace WPFLearn.ViewModels
                 Name = $"Договор №{provisionOfService_max_index}",
                 Date = DateTime.Now,
                 Services = new ObservableCollection<Service>(),
-                Clients = new Clients($"Клиент {provisionOfService_max_index}")
+                Clients = new Clients { Name = $"Клинет {provisionOfService_max_index}" }
             };
 
             ProvisionOfServices.Add(new_provisionOfService);
@@ -127,13 +127,17 @@ namespace WPFLearn.ViewModels
                 Description = $"Очень длинной описание предоставляемой услуги {i}"
             });
 
-
             var provision = Enumerable.Range(1, 20).Select(i => new ProvisionOfServices
             {
                 Name = $"Договор №{i}",
                 Date = DateTime.Now,
                 Services = new ObservableCollection<Service>(services),
-                Clients = new Clients($"Клиент {i}")
+                Clients = new Clients
+                {
+                    Name = $"Клиент {i}",
+                    Number = $"{i}{i * 2}{i * 7 / 2}",
+                    Description = "Описание клиента"
+                }
             });
 
             ProvisionOfServices = new ObservableCollection<ProvisionOfServices>(provision);
