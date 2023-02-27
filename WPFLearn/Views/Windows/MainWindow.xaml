@@ -45,18 +45,21 @@
                     <GroupBox Header="Договора">
                         <DockPanel>
                             <DockPanel.Resources>
-                                <CollectionViewSource x:Key="ContractsCollection"/>
+                                <CollectionViewSource x:Key="ContractsCollection" 
+                                                      x:Name="ContractsCollection"
+                                                      Source="{Binding Contracts}"
+                                                      Filter="ContractsCollection_OnFilter"/>
                             </DockPanel.Resources>
                             <DockPanel DockPanel.Dock="Top" Margin="0,3">
                                 <fa5:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"/>
-                                <TextBox/>
+                                <TextBox Name="ContractNameFilterText" TextChanged="OnContractFilterTextChanged"/>
                             </DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1">
                                 <Button Content="Добавить" Command="{Binding CreateNewContractCommand}"/>
                                 <Button Content="Удалить" Command="{Binding DeleteContractCommand}" CommandParameter="{Binding selectedContract}"/>
                             </UniformGrid>
                             <ListBox
-                                ItemsSource="{Binding Contracts}" 
+                                ItemsSource="{Binding Source={StaticResource ContractsCollection}}" 
                                 DisplayMemberPath="Name"
                                 SelectedItem="{Binding selectedContract}" 
                                  SelectedIndex="0"/>
