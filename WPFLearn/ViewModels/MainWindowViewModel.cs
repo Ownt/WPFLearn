@@ -13,18 +13,18 @@ namespace WPFLearn.ViewModels
     {
         /*-------------------------------------------------------------------*/
 
-        public ObservableCollection<ProvisionOfServices> ProvisionOfServices { get; }
+        public ObservableCollection<Contracts> Contracts { get; }
 
-        #region SelectedProvisionOfServices
-
-        /// <summary>Выбранный договор</summary>
-        private ProvisionOfServices _ProvisionOfServices;
+        #region SelectedContract
 
         /// <summary>Выбранный договор</summary>
-        public ProvisionOfServices pOfServices 
+        private Contracts _SelectedContract;
+
+        /// <summary>Выбранный договор</summary>
+        public Contracts selectedContract 
         { 
-            get => _ProvisionOfServices;
-            set => Set(ref _ProvisionOfServices, value);
+            get => _SelectedContract;
+            set => Set(ref _SelectedContract, value);
         }
 
         #endregion
@@ -53,17 +53,17 @@ namespace WPFLearn.ViewModels
 
         #endregion
 
-        #region CreateProvisionOfServicesCommand
+        #region CreateNewContractCommand
 
         /// <summary> Команда добавления договора </summary>
-        public ICommand CreateNewProvisionOfServicesCommand { get; }
+        public ICommand CreateNewContractCommand { get; }
 
-        private bool CanCreateNewProvisionOfServicesExecute(object p) => true;
+        private bool CanCreateNewContractCommandExecute(object p) => true;
 
-        private void OnCreateNewProvisionOfServicesExecute(object p)
+        private void OnCreateNewContractCommandExecute(object p)
         {
-            var provisionOfService_max_index = ProvisionOfServices.Count + 1;
-            var new_provisionOfService = new ProvisionOfServices
+            var provisionOfService_max_index = Contracts.Count + 1;
+            var new_provisionOfService = new Contracts
             {
                 Name = $"Договор №{provisionOfService_max_index}",
                 Date = DateTime.Now,
@@ -71,25 +71,25 @@ namespace WPFLearn.ViewModels
                 Clients = new Clients { Name = $"Клинет {provisionOfService_max_index}" }
             };
 
-            ProvisionOfServices.Add(new_provisionOfService);
+            Contracts.Add(new_provisionOfService);
         }
 
         #endregion
 
-        #region DeleteProvisionOfServicesCommand
+        #region DeleteContractCommand
 
         /// <summary> Команда удаления договора </summary>
-        public ICommand DeleteProvisionOfServicesCommand { get; }
+        public ICommand DeleteContractCommand { get; }
 
-        private bool CanDeleteProvisionOfServicesExecute(object p) => p is ProvisionOfServices && ProvisionOfServices.Contains(pOfServices);
+        private bool CanDeleteContractCommandExecute(object p) => p is Contracts && Contracts.Contains(selectedContract);
 
-        private void OnDeleteProvisionOfServicesExecute(object p)
+        private void OnDeleteContractCommandExecute(object p)
         {
-            if (!(p is ProvisionOfServices)) return;
-            var index = ProvisionOfServices.IndexOf(pOfServices);
-            ProvisionOfServices.Remove(pOfServices);
-            if (index < ProvisionOfServices.Count)
-                pOfServices = ProvisionOfServices[index];
+            if (!(p is Contracts)) return;
+            var index = Contracts.IndexOf(selectedContract);
+            Contracts.Remove(selectedContract);
+            if (index < Contracts.Count)
+                selectedContract = Contracts[index];
         }
 
         #endregion
@@ -108,14 +108,14 @@ namespace WPFLearn.ViewModels
                 CanCloseApplicationCommandExecuted);
 
             /// <summary> Добавление договора </summary>
-            CreateNewProvisionOfServicesCommand = new LambdaCommand(
-                OnCreateNewProvisionOfServicesExecute, 
-                CanCreateNewProvisionOfServicesExecute);
+            CreateNewContractCommand = new LambdaCommand(
+                OnCreateNewContractCommandExecute, 
+                CanCreateNewContractCommandExecute);
 
             /// <summary> Удаление договора </summary>
-            DeleteProvisionOfServicesCommand = new LambdaCommand(
-                OnDeleteProvisionOfServicesExecute, 
-                CanDeleteProvisionOfServicesExecute);
+            DeleteContractCommand = new LambdaCommand(
+                OnDeleteContractCommandExecute, 
+                CanDeleteContractCommandExecute);
 
 
             #endregion
@@ -127,7 +127,7 @@ namespace WPFLearn.ViewModels
                 Description = $"Очень длинной описание предоставляемой услуги {services_index++}"
             });
 
-            var provision = Enumerable.Range(1, 20).Select(i => new ProvisionOfServices
+            var contracts = Enumerable.Range(1, 20).Select(i => new Contracts
             {
                 Name = $"Договор №{i}",
                 Date = DateTime.Now,
@@ -140,7 +140,7 @@ namespace WPFLearn.ViewModels
                 }
             });
 
-            ProvisionOfServices = new ObservableCollection<ProvisionOfServices>(provision);
+            Contracts = new ObservableCollection<Contracts>(contracts);
 
         }
 

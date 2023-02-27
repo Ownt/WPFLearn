@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WPFLearn.Models
 {
-    internal class ProvisionOfServices
+    internal class Contracts
     {
         public string? Name { get; set; }
 
