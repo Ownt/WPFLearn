@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -36,6 +37,14 @@ namespace WPFLearn.ViewModels
         public string Title { get => _Title; set => Set(ref _Title, value); }
 
         #endregion
+
+        public IEnumerable<Clients> TestClients =>
+            Enumerable.Range(1, App.IsDesignMode ? 10 : 100_000)
+            .Select(i => new Clients
+            {
+                Name = $"Клиент {i}",
+                Number = $"Номер клиента {i}"
+            });
 
         /*-------------------------------------------------------------------*/
 

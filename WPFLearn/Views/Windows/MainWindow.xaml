@@ -25,7 +25,7 @@
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock Text="Готово!"/>
         </StatusBar>
-        <TabControl SelectedIndex="2">
+        <TabControl SelectedIndex="3">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -111,6 +111,31 @@
                             </DockPanel>
                         </Grid>
                     </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Тестирование виртуализации">
+                <Grid>
+                    <!--<TextBlock Text="{Binding Source={x:Static local:App.IsDesignMode}}"/>-->
+                    <ListBox HorizontalAlignment="Left" Width="200" Margin="30"
+                             ItemsSource="{Binding TestClients}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                            
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="model:Clients">
+                                <Border BorderBrush="Orange" BorderThickness="1" CornerRadius="3" Padding="3">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Number}" ToolTip="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Description, TargetNullValue=--}" ToolTip="{Binding Name}"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </TabItem>
         </TabControl>
