@@ -44,11 +44,15 @@
                     </Grid.ColumnDefinitions>
                     <GroupBox Header="Договора">
                         <DockPanel>
+                            <DockPanel DockPanel.Dock="Top" Margin="0,3">
+                                <fa5:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"/>
+                                <TextBox/>
+                            </DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1">
                                 <Button Content="Добавить" Command="{Binding CreateNewProvisionOfServicesCommand}"/>
                                 <Button Content="Удалить" Command="{Binding DeleteProvisionOfServicesCommand}" CommandParameter="{Binding pOfServices}"/>
                             </UniformGrid>
-                            <ListBox Margin="0,5,0,5"
+                            <ListBox
                                 ItemsSource="{Binding ProvisionOfServices}" 
                                 DisplayMemberPath="Name"
                                 SelectedItem="{Binding pOfServices}" 
@@ -72,18 +76,24 @@
                                             Margin="10,10,0,0"
                                             SelectedDate="{Binding pOfServices.Date, StringFormat=dd.MM.yy}"/>
                             </StackPanel>
-                            <DataGrid Grid.Row="1" 
+                            <DockPanel Grid.Row="1">
+                                <DockPanel DockPanel.Dock="Top" Margin="0,3">
+                                    <fa5:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"/>
+                                    <TextBox/>
+                                </DockPanel>
+                                <DataGrid 
                                       Margin="5,5,5,5" 
                                       ItemsSource="{Binding pOfServices.Services}" 
                                       AutoGenerateColumns="False"
                                       GridLinesVisibility="Horizontal"
                                       HorizontalGridLinesBrush="Gray">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Услуги" Binding="{Binding Name}" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=0 руб}"/>
-                                    <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
-                                </DataGrid.Columns> 
-                            </DataGrid>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Услуги" Binding="{Binding Name}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=0 руб}"/>
+                                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
                         </Grid>
                     </GroupBox>
                 </Grid>

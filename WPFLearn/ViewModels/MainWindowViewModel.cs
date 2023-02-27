@@ -119,12 +119,12 @@ namespace WPFLearn.ViewModels
 
 
             #endregion
-
+            var services_index = 1;
             var services = Enumerable.Range(1, 10).Select(i => new Service
             {
-                Name = $"Услуга {i}",
-                Price = 100 * i,
-                Description = $"Очень длинной описание предоставляемой услуги {i}"
+                Name = $"Услуга {services_index}",
+                Price = 100 * services_index,
+                Description = $"Очень длинной описание предоставляемой услуги {services_index++}"
             });
 
             var provision = Enumerable.Range(1, 20).Select(i => new ProvisionOfServices
