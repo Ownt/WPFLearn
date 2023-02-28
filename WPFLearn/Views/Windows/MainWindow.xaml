@@ -25,7 +25,7 @@
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock Text="Готово!"/>
         </StatusBar>
-        <TabControl SelectedIndex="3">
+        <TabControl SelectedIndex="2">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -94,15 +94,18 @@
                             <DockPanel Grid.Row="1">
                                 <DockPanel DockPanel.Dock="Top" Margin="0,3">
                                     <fa5:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"/>
-                                    <TextBox/>
+                                    <TextBox Text ="{Binding ServiceFilterText, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DockPanel>
                                 <DataGrid 
                                       Margin="5,5,5,5" 
-                                      ItemsSource="{Binding selectedContract.Services}" 
+                                      ItemsSource="{Binding SelectedContractSerice}" 
                                       AutoGenerateColumns="False"
                                       GridLinesVisibility="Horizontal"
                                       HorizontalGridLinesBrush="Gray"
                                       EnableRowVirtualization="True">
+                                    <DataGrid.GroupStyle>
+                                        <GroupStyle/>
+                                    </DataGrid.GroupStyle>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Услуги" Binding="{Binding Name}" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=0 руб}"/>

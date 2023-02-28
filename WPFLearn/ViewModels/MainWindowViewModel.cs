@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using WPFLearn.Infrastructure.Commands;
 using WPFLearn.Models;
@@ -25,12 +27,66 @@ namespace WPFLearn.ViewModels
         public Contracts selectedContract 
         { 
             get => _SelectedContract;
-            set => Set(ref _SelectedContract, value);
+            set 
+            { 
+                if(!Set(ref _SelectedContract, value)) return;
+                _SelectedContractSerice.Source = value?.Services;
+                OnPropertyChanged(nameof(SelectedContractSerice));
+            }
         }
 
         #endregion
 
-        #region Заголовок главного окна
+        #region ServiceFilterText : string - Текст фильтра услуг
+
+        /// <summary> Текст фильра услуг </summary>
+
+        private string _ServiceFilterText;
+        /// <summary> Текст фильра услуг </summary>
+        public string ServiceFilterText
+        {
+            get => _ServiceFilterText;
+            set
+            {
+                if(!Set(ref _ServiceFilterText, value)) return;
+                _SelectedContractSerice.View.Refresh();
+            }
+        }
+
+        #endregion
+
+        #region SelectedContractServices
+
+        readonly private CollectionViewSource _SelectedContractSerice = new CollectionViewSource();
+
+        public ICollectionView SelectedContractSerice => _SelectedContractSerice?.View;
+
+        private void OnServiceFilter(object sender, FilterEventArgs e)
+        {
+            if (!(e.Item is Service service))
+            {
+                e.Accepted = false;
+                return;
+            }
+
+            var filter_text = _ServiceFilterText;
+            if (string.IsNullOrWhiteSpace(filter_text)) return;
+
+            if (service.Name is null || service.Description is null)
+            {
+                e.Accepted = false;
+                return;
+            }
+
+            if (service.Name.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+            if (service.Description.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+
+            e.Accepted = false;
+        }
+
+        #endregion
+
+            #region Заголовок главного окна
 
         private string _Title = "Главное окно";
         /// <summary> Заголовок окна</summary>
@@ -39,7 +95,7 @@ namespace WPFLearn.ViewModels
         #endregion
 
         public IEnumerable<Clients> TestClients =>
-            Enumerable.Range(1, App.IsDesignMode ? 10 : 100_000)
+            Enumerable.Range(1, App.IsDesignMode ? 10 : 100)
             .Select(i => new Clients
             {
                 Name = $"Клиент {i}",
@@ -151,6 +207,9 @@ namespace WPFLearn.ViewModels
 
             Contracts = new ObservableCollection<Contracts>(contracts);
 
+            _SelectedContractSerice.Filter += OnServiceFilter;
+            //_SelectedContractSerice.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+            _SelectedContractSerice.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
         }
 
         /*-------------------------------------------------------------------*/
