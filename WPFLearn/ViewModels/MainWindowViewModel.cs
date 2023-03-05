@@ -192,17 +192,24 @@ namespace WPFLearn.ViewModels
                 Description = $"Очень длинной описание предоставляемой услуги {services_index++}"
             });
 
+            Clients[] clients = new Clients[10];
+            for (int i = 0; i < clients.Length; i++)
+            {
+                clients[i] = new Clients
+                {
+                    Name = $"Клиент {i + 1}",
+                    Number = $"Номер клиента {i + 1}",
+                    Description = $"Описание клиента {i + 1}"
+                };
+            }
+
+            var rnd = new Random();
             var contracts = Enumerable.Range(1, 20).Select(i => new Contracts
             {
                 Name = $"Договор №{i}",
                 Date = DateTime.Now,
                 Services = new ObservableCollection<Service>(services),
-                Clients = new Clients
-                {
-                    Name = $"Клиент {i}",
-                    Number = $"{i}{i * 2}{i * 7 / 2}",
-                    Description = "Описание клиента"
-                }
+                Clients = (Clients)rnd.NextItem(clients)
             });
 
             Contracts = new ObservableCollection<Contracts>(contracts);
