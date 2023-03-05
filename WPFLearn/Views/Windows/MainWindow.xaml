@@ -16,13 +16,13 @@
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+        <Menu IsMainMenu="True">
             <MenuItem Header="Файл">
                 <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>
             </MenuItem>
             <MenuItem Header="Помощь"/>
         </Menu>
-        <StatusBar DockPanel.Dock="Bottom">
+        <StatusBar>
             <TextBlock Text="Готово!"/>
         </StatusBar>
         <TabControl SelectedIndex="2">
